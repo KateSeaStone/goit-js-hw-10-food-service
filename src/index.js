@@ -27,13 +27,20 @@ function createMenu(menu) {
 
 refs.toggle.addEventListener('change', changeTheme);
 function changeTheme(event) {
-  const theme = event.target.checked ? Theme.DARK : Theme.LIGHT;
-  refs.body.className = theme;
-  saveTheme(theme);
+  if (event.target.checked) {
+    refs.body.classList.add(Theme.DARK);
+    refs.body.classList.remove(Theme.LIGHT);
+    saveTheme(Theme.DARK);
+  } else {
+    refs.body.classList.add(Theme.LIGHT);
+    refs.body.classList.remove(Theme.DARK);
+    saveTheme(Theme.LIGHT);
+  }
+
 }
 
 function initializeTheme() {
   const initTheme = (getTheme() || Theme.LIGHT);
-  refs.body.className = initTheme;
+  refs.body.classList.add(initTheme);
   refs.toggle.checked = (initTheme === Theme.DARK);
 } 
